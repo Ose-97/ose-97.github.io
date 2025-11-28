@@ -7,11 +7,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
+    /* Animated background gradient */
     body {
       background: radial-gradient(circle at top, #1f2933 0, #020617 55%);
       color: #f9fafb;
       overflow-x: hidden;
     }
+
     .gradient-orbit {
       background: conic-gradient(
         from 180deg,
@@ -26,33 +28,48 @@
       opacity: 0.18;
       animation: spin 26s linear infinite;
     }
+
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
+
+    /* Simple fade-in on scroll */
     .fade-section {
       opacity: 0;
       transform: translateY(24px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .fade-visible { opacity: 1; transform: translateY(0); }
+    .fade-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Card glow */
     .glow-card {
       box-shadow:
-        0 0 0 1px rgba(148,163,184,0.15),
-        0 18px 40px rgba(15,23,42,0.9);
+        0 0 0 1px rgba(148, 163, 184, 0.15),
+        0 18px 40px rgba(15, 23, 42, 0.9);
     }
     .glow-card:hover {
       box-shadow:
-        0 0 0 1px rgba(251,191,36,0.6),
-        0 22px 60px rgba(24,24,27,1);
+        0 0 0 1px rgba(251, 191, 36, 0.6),
+        0 22px 60px rgba(24, 24, 27, 1);
     }
+
     .pill {
       background: linear-gradient(90deg, #f97316, #ec4899, #a855f7);
     }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
 <body class="font-sans" id="top">
 
+  <!-- Floating gradient blobs -->
   <div class="fixed inset-0 -z-10 overflow-hidden">
     <div class="gradient-orbit w-[60rem] h-[60rem] rounded-full absolute -top-40 -right-40"></div>
     <div class="gradient-orbit w-[40rem] h-[40rem] rounded-full absolute bottom-[-10rem] left-[-10rem] opacity-60"></div>
@@ -65,61 +82,399 @@
         <span class="inline-flex h-7 w-7 items-center justify-center rounded-full pill text-xs text-white">O</span>
         <span>Ose<span class="text-amber-400"> Creative</span></span>
       </a>
+
       <nav class="hidden md:flex gap-6 text-sm text-gray-200">
-        <a href="#about" class="hover:text-amber-300">About</a>
-        <a href="#roles" class="hover:text-amber-300">Roles</a>
-        <a href="#projects" class="hover:text-amber-300">Case Studies</a>
-        <a href="#reels" class="hover:text-amber-300">Video Reels</a>
-        <a href="#contact" class="hover:text-amber-300">Contact</a>
+        <a href="#about" class="hover:text-amber-300 transition">About</a>
+        <a href="#roles" class="hover:text-amber-300 transition">Roles</a>
+        <a href="#projects" class="hover:text-amber-300 transition">Case Studies</a>
+        <a href="#reels" class="hover:text-amber-300 transition">Video Reels</a>
+        <a href="#contact" class="hover:text-amber-300 transition">Contact</a>
       </nav>
-      <a href="https://docs.google.com/document/d/1SiqDAvB-5smVrg8PYhKhx-sxiN1hpYkqfMSlNrYHKM8/export?format=pdf"
-         class="hidden md:inline-block pill text-black px-4 py-2 rounded-full text-xs font-semibold">
+
+      <a
+        href="https://docs.google.com/document/d/1SiqDAvB-5smVrg8PYhKhx-sxiN1hpYkqfMSlNrYHKM8/export?format=pdf"
+        class="hidden md:inline-block pill text-black px-4 py-2 rounded-full text-xs font-semibold shadow-md hover:brightness-110 transition"
+      >
         Download Résumé
       </a>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="min-h-[80vh] flex items-center px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto fade-section">
-      <p class="uppercase tracking-wide text-xs text-amber-300 mb-4">
-        Marketing & Communication Videographer · ASA Creative Director · Gospel Choir Social Media Manager
-      </p>
+  <main>
 
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black mb-4">
-        Hi, I’m Ose 👋<br />
-        <span class="bg-gradient-to-r from-amber-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
-          I shoot videos, tell stories, and gently bully the algorithm into noticing them.
-        </span>
-      </h1>
+    <!-- HERO -->
+    <section class="min-h-[80vh] flex items-center px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-[1.3fr,1fr] gap-10 items-center fade-section">
+        <div>
+          <p class="uppercase tracking-[0.16em] text-xs text-amber-300/80 mb-4">
+            Marketing & Communication Videographer · ASA Creative Director · Gospel Choir Social Media Manager
+          </p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-4">
+            Hi, I’m Ose <span class="inline-block animate-bounce">👋</span><br />
+            <span class="bg-gradient-to-r from-amber-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+              I shoot videos, tell stories, and gently bully the algorithm into noticing them.
+            </span>
+          </h1>
+          <p class="text-base sm:text-lg text-gray-200 max-w-xl mb-6">
+            I help universities, student orgs, and choirs look impossible to scroll past—with story-driven video, bold
+            visuals, and social media that actually gets saved and shared.
+          </p>
 
-      <div class="flex flex-col sm:flex-row gap-4 mt-6">
-        <a href="#reels" class="pill text-black px-6 py-3 rounded-full font-semibold">▶ Watch My Reels</a>
-        <a href="#projects" class="border border-amber-300 px-6 py-3 rounded-full text-amber-300">View Case Studies</a>
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <a
+              href="#reels"
+              class="pill text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:brightness-110 transition text-center text-sm sm:text-base"
+            >
+              ▶ Watch My Reels
+            </a>
+            <a
+              href="#projects"
+              class="px-6 py-3 rounded-full font-semibold border border-amber-300/60 text-amber-200 bg-black/40 hover:bg-amber-500/10 transition text-center text-sm sm:text-base"
+            >
+              View Case Studies
+            </a>
+          </div>
+        </div>
+
+        <!-- Highlight card -->
+        <div class="glow-card bg-black/60 border border-zinc-800 rounded-2xl p-6 md:p-7 flex flex-col gap-4">
+          <h2 class="text-lg font-semibold mb-1">At a Glance</h2>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="text-xs uppercase tracking-wide text-gray-400">Videos</p>
+              <p class="text-2xl font-bold text-amber-300">100+</p>
+              <p class="text-xs text-gray-400">Shot, edited & delivered for events and campaigns.</p>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-wide text-gray-400">Organizations</p>
+              <p class="text-2xl font-bold text-pink-400">3</p>
+              <p class="text-xs text-gray-400">Calvin Marketing, ASA, & Gospel Choir.</p>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-wide text-gray-400">Strength</p>
+              <p class="text-xl font-semibold text-sky-300">Story-first</p>
+              <p class="text-xs text-gray-400">Every post, reel, and poster has purpose.</p>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-wide text-gray-400">Vibe</p>
+              <p class="text-xl font-semibold text-purple-300">Fun + strategic</p>
+              <p class="text-xs text-gray-400">Energy with a clear marketing goal.</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ROLES -->
-  <section id="roles" class="py-20 px-4 sm:px-6 fade-section">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-center">The Big 3</h2>
+    <!-- ROLES -->
+    <section id="roles" class="py-20 px-4 sm:px-6 fade-section">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-center">The Big 3</h2>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="glow-card p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold mb-1">Marketing & Communication Videographer</h3>
-          <p class="text-gray-400 text-sm">Calvin University</p>
-        </div>
-        <div class="glow-card p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold mb-1">Creative Director</h3>
-          <p class="text-gray-400 text-sm">African Students Association</p>
-        </div>
-        <div class="glow-card p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold mb-1">Social Media Manager</h3>
-          <p class="text-gray-400 text-sm">Calvin Gospel Choir</p>
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Role 1 -->
+          <div class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-6 hover:-translate-y-1 transition-transform">
+            <p class="text-xs font-semibold text-amber-300 tracking-wide mb-1">01</p>
+            <h3 class="text-xl font-semibold mb-2">
+              Marketing & Communication Student Videographer
+            </h3>
+            <p class="text-xs text-gray-400 mb-2">
+              Calvin University
+            </p>
+            <p class="text-gray-200 text-sm leading-relaxed">
+              Concept, shoot, and edit promotional pieces—from hype reels to heartfelt stories—
+              that support admissions, events, and campus campaigns.
+            </p>
+          </div>
+
+          <!-- Role 2 -->
+          <div class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-6 hover:-translate-y-1 transition-transform">
+            <p class="text-xs font-semibold text-pink-300 tracking-wide mb-1">02</p>
+            <h3 class="text-xl font-semibold mb-2">
+              Creative Director · African Students Association
+            </h3>
+            <p class="text-xs text-gray-400 mb-2">
+              Calvin University
+            </p>
+            <p class="text-gray-200 text-sm leading-relaxed">
+              Lead visual identity, event branding, posters, and digital campaigns that celebrate
+              African culture and consistently pack the room.
+            </p>
+          </div>
+
+          <!-- Role 3 -->
+          <div class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-6 hover:-translate-y-1 transition-transform">
+            <p class="text-xs font-semibold text-sky-300 tracking-wide mb-1">03</p>
+            <h3 class="text-xl font-semibold mb-2">
+              Social Media Manager · Gospel Choir
+            </h3>
+            <p class="text-xs text-gray-400 mb-2">
+              Calvin University Gospel Choir
+            </p>
+            <p class="text-gray-200 text-sm leading-relaxed">
+              Build content calendars, capture performances & behind-the-scenes moments,
+              and translate the choir’s sound into a visual brand.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-20 px-4 sm:px-6 fade-section">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr,1fr] gap-10 items-center">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">The Story Behind the Camera</h2>
+          <p class="text-gray-100 leading-relaxed mb-3 text-sm sm:text-base">
+            I’m a marketing-minded creative who loves turning “regular campus stuff” into content that feels cinematic,
+            personal, and deeply shareable.
+          </p>
+          <p class="text-gray-300 text-sm leading-relaxed mb-3">
+            At Calvin, I balance official university messaging with the energy of student life—working across
+            Marketing & Communications, the African Students Association, and the Gospel Choir.
+          </p>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Whether it’s a 15-second reel or a full event campaign, my goal is simple:
+            make your audience feel something <span class="text-amber-300 font-medium">and</span> do something—click, share, show up, or sing along.
+          </p>
+        </div>
+        <div class="glow-card bg-black/60 border border-zinc-800 rounded-2xl p-6 text-sm text-gray-200">
+          <h3 class="font-semibold mb-3 text-lg">What I Bring</h3>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Shot & edited 100+ videos for events, promos, and social.</li>
+            <li>Experience building consistent visual identity across student orgs.</li>
+            <li>Comfortable collaborating with staff, students, and leadership.</li>
+            <li>Blend of strategy, storytelling, and on-the-fly creativity.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="projects" class="py-20 px-4 sm:px-6 fade-section">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-center">Selected Case Studies</h2>
+        <p class="text-sm text-gray-300 text-center max-w-2xl mx-auto mb-10">
+          A snapshot of how I think about campaigns—from problem → idea → execution → impact.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Case 1 -->
+          <article class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-semibold mb-2 text-amber-300">
+                Calvin Admissions Video Series
+              </h3>
+              <p class="text-gray-400 text-xs mb-3">
+                Role: Student Videographer · Marketing & Communications
+              </p>
+              <p class="text-gray-100 text-sm leading-relaxed">
+                Produced short-form videos highlighting student life, events, and academic programs for use across social and web.
+                Focused on clean visuals, strong pacing, and “I could see myself here” storytelling.
+              </p>
+            </div>
+            <p class="mt-4 text-[11px] text-gray-400">
+              Add impact—e.g. “Used in X campaigns and helped drive Y% increase in views on admissions reels.”
+            </p>
+          </article>
+
+          <!-- Case 2 -->
+          <article class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-semibold mb-2 text-pink-300">
+                ASA “Mr & Miss ASA” Campaign
+              </h3>
+              <p class="text-gray-400 text-xs mb-3">
+                Role: Creative Director · African Students Association
+              </p>
+              <p class="text-gray-100 text-sm leading-relaxed">
+                Led visual strategy, poster design, social teasers, and countdown content for a flagship cultural event.
+                Built a cohesive look across print and digital that matched the energy of the night.
+              </p>
+            </div>
+            <p class="mt-4 text-[11px] text-gray-400">
+              Add metrics—attendance, ticket sell-out time, or social engagement growth during the campaign.
+            </p>
+          </article>
+
+          <!-- Case 3 -->
+          <article class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-semibold mb-2 text-sky-300">
+                Gospel Choir Social Refresh
+              </h3>
+              <p class="text-gray-400 text-xs mb-3">
+                Role: Social Media Manager · Calvin Gospel Choir
+              </p>
+              <p class="text-gray-100 text-sm leading-relaxed">
+                Reframed the choir’s feed around rehearsals, performances, and human moments.
+                Focused on reels that captured the sound, joy, and community so people felt the music before they ever walked in.
+              </p>
+            </div>
+            <p class="mt-4 text-[11px] text-gray-400">
+              Add numbers—average reel views, saves, shares, or growth over a semester.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO REELS -->
+    <section id="reels" class="py-20 px-4 sm:px-6 fade-section">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-center">Video Reels</h2>
+        <p class="text-sm text-gray-300 text-center max-w-2xl mx-auto mb-10">
+          Click through to see how I handle pacing, sound, and storytelling across different types of projects.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Reel 1 -->
+          <div class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3">
+            <a
+              href="https://www.instagram.com/reel/DOwWK6mFRjC/"
+              target="_blank"
+              class="relative block group"
+            >
+              <img
+                src="calvin-reel.jpg"
+                alt="Calvin Hype / Campus Life Reel"
+                class="aspect-video w-full object-cover rounded-xl"
+              />
+              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                <span class="pill text-xs font-semibold text-white px-4 py-2 rounded-full">
+                  ▶ Play reel
+                </span>
+              </div>
+            </a>
+            <div>
+              <h3 class="font-semibold text-sm mb-1">Calvin Hype / Campus Life Reel</h3>
+              <a
+                href="https://www.instagram.com/reel/DOwWK6mFRjC/"
+                target="_blank"
+                class="text-amber-300 text-xs hover:underline"
+              >
+                Watch reel →
+              </a>
+            </div>
+          </div>
+
+          <!-- Reel 2 -->
+          <div class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3">
+            <a
+              href="https://www.instagram.com/p/DRGZi_FjK4E/"
+              target="_blank"
+              class="relative block group"
+            >
+              <img
+                src="asa-reel.jpg"
+                alt="ASA Event / Mr & Miss ASA Reel"
+                class="aspect-video w-full object-cover rounded-xl"
+              />
+              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                <span class="pill text-xs font-semibold text-white px-4 py-2 rounded-full">
+                  ▶ Play reel
+                </span>
+              </div>
+            </a>
+            <div>
+              <h3 class="font-semibold text-sm mb-1">ASA Event / Mr & Miss ASA</h3>
+              <a
+                href="https://www.instagram.com/p/DRGZi_FjK4E/"
+                target="_blank"
+                class="text-pink-300 text-xs hover:underline"
+              >
+                Watch reel →
+              </a>
+            </div>
+          </div>
+
+          <!-- Reel 3 -->
+          <div class="glow-card bg-black/65 border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3">
+            <a
+              href="https://www.instagram.com/p/DQ0cjkADW7k/"
+              target="_blank"
+              class="relative block group"
+            >
+              <img
+                src="choir-reel.jpg"
+                alt="Gospel Choir Performance Snippets Reel"
+                class="aspect-video w-full object-cover rounded-xl"
+              />
+              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                <span class="pill text-xs font-semibold text-white px-4 py-2 rounded-full">
+                  ▶ Play reel
+                </span>
+              </div>
+            </a>
+            <div>
+              <h3 class="font-semibold text-sm mb-1">Gospel Choir Performance Snippets</h3>
+              <a
+                href="https://www.instagram.com/p/DQ0cjkADW7k/"
+                target="_blank"
+                class="text-sky-300 text-xs hover:underline"
+              >
+                Watch reel →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-20 px-4 sm:px-6 fade-section">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Let’s Build Something</h2>
+        <p class="text-sm sm:text-base text-gray-200 max-w-2xl mx-auto mb-8">
+          Need a campaign, content for an event, or someone to make your organization feel alive online?
+          I’m open to collaborations, freelance projects, and future roles in marketing and creative production.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <a
+            href="mailto:osemudia97@gmail.com"
+            class="pill text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:brightness-110 transition w-full sm:w-auto text-sm sm:text-base"
+          >
+            Email Me
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ose-a-shadrach/"
+            target="_blank"
+            class="px-6 py-3 rounded-full font-semibold border border-zinc-300/60 text-gray-100 bg-black/40 hover:bg-white/5 transition w-full sm:w-auto text-sm sm:text-base"
+          >
+            Connect on LinkedIn
+          </a>
+        </div>
+
+        <p class="text-[11px] text-gray-400">
+          You can also add Instagram / TikTok handles for ASA or Gospel Choir here if you’d like.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-zinc-800 py-5 text-center text-[11px] text-gray-400 bg-black/70">
+    © <span id="year"></span> Ose Aisuodionoe-Shadrach · Built with GitHub Pages & Tailwind
+  </footer>
+
+  <script>
+    // Auto year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll(".fade-section").forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
