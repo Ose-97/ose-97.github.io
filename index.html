@@ -86,6 +86,20 @@
       border-radius: 1px;
     }
 
+    /* Soft glow pulse for the main stat */
+    @keyframes glowPulse {
+      0%, 100% {
+        text-shadow: 0 0 0 rgba(255, 255, 227, 0);
+      }
+      50% {
+        text-shadow: 0 0 18px rgba(255, 255, 227, 0.9);
+      }
+    }
+
+    .glow-count {
+      animation: glowPulse 2.2s ease-in-out infinite;
+    }
+
     html {
       scroll-behavior: smooth;
     }
@@ -141,8 +155,6 @@
             </span>
           </h1>
 
-          
-
           <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <a
               href="#reels"
@@ -157,34 +169,36 @@
               View Case Studies
             </a>
           </div>
-
-          
         </div>
 
-        <!-- Fun stat / highlight card -->
-        <div class="glow-card bg-black/70 border border-zinc-800 rounded-2xl p-6 md:p-7 flex flex-col gap-4">
-          <h2 class="text-lg font-semibold mb-1">At a Glance</h2>
-          <div class="grid grid-cols-2 gap-4 text-sm">
+        <!-- At a Glance card with count-up + glow -->
+        <div class="glow-card bg-black/70 border border-zinc-800 rounded-2xl p-8 md:p-10 flex flex-col gap-6">
+          <h2 class="text-lg font-semibold mb-4">At a Glance</h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
+
+            <!-- Videos -->
             <div>
-              <p class="text-xs uppercase tracking-wide text-gray-400">Videos</p>
-              <p class="text-2xl font-bold text-[var(--ink-ivory)]">100+</p>
-              <p class="text-xs text-gray-400">Shot, edited & delivered for events and campaigns.</p>
+              <p class="text-xs uppercase tracking-wide text-gray-400 mb-1">Videos</p>
+              <p class="text-4xl font-bold text-[var(--ink-ivory)] mb-2">
+                <span class="countup glow-count" data-target="100" data-suffix="+">0</span>
+              </p>
+              <p class="text-sm text-gray-300">
+                Shot, edited & delivered for events and campaigns.
+              </p>
             </div>
+
+            <!-- Organizations -->
             <div>
-              <p class="text-xs uppercase tracking-wide text-gray-400">Organizations</p>
-              <p class="text-2xl font-bold text-[var(--ink-gray)]">3</p>
-              <p class="text-xs text-gray-400">Calvin Marketing, ASA, & Gospel Choir.</p>
+              <p class="text-xs uppercase tracking-wide text-gray-400 mb-1">Organizations</p>
+              <p class="text-4xl font-bold text-[var(--ink-gray)] mb-2">
+                <span class="countup" data-target="3">0</span>
+              </p>
+              <p class="text-sm text-gray-300">
+                Calvin Marketing, ASA, & Gospel Choir.
+              </p>
             </div>
-            <div>
-              <p class="text-xs uppercase tracking-wide text-gray-400">Strength</p>
-              <p class="text-xl font-semibold text-[var(--ink-slate)]">Story-first</p>
-              <p class="text-xs text-gray-400">Every post, reel, and poster has purpose.</p>
-            </div>
-            <div>
-              <p class="text-xs uppercase tracking-wide text-gray-400">Vibe</p>
-              <p class="text-xl font-semibold text-[var(--ink-ivory)]">Fun + strategic</p>
-              <p class="text-xs text-gray-400">Energy with a clear marketing goal.</p>
-            </div>
+
           </div>
         </div>
       </div>
@@ -499,6 +513,54 @@
 
     document.querySelectorAll(".fade-section").forEach(section => {
       observer.observe(section);
+    });
+
+    // Count-up animation for stats
+    const runCountUp = (el) => {
+      const target = parseInt(el.dataset.target, 10) || 0;
+      const suffix = el.dataset.suffix || "";
+      const duration = 1200; // ms
+      const start = performance.now();
+      let hasFinished = false;
+
+      const step = (now) => {
+        if (hasFinished) return;
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+        const value = Math.floor(eased * target);
+        el.textContent = value + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = target + suffix; // ensure final value
+          hasFinished = true;
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const countedSet = new WeakSet();
+
+    const countObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            if (!countedSet.has(el)) {
+              runCountUp(el);
+              countedSet.add(el);
+            }
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    // Attach observer to all countup elements
+    document.querySelectorAll(".countup").forEach((el) => {
+      countObserver.observe(el);
     });
   </script>
 </body>
