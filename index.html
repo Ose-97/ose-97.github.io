@@ -182,36 +182,37 @@
           </div>
         </div>
 
-        <!-- At a Glance card -->
-        <div class="glow-card bg-black/70 border border-zinc-800 rounded-2xl p-8 md:p-10 flex flex-col gap-6">
-          <h2 class="text-lg font-semibold mb-4">At a Glance</h2>
+        <!-- At a Glance card (FIXED LAYOUT) -->
+<div class="glow-card bg-black/75 border border-zinc-800 rounded-2xl p-8 md:p-10 flex flex-col gap-8 min-w-[260px]">
+  <h2 class="text-lg font-semibold text-center tracking-wide">At a Glance</h2>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
-            <!-- Videos -->
-            <div>
-              <p class="text-xs uppercase tracking-wide text-gray-400 mb-1">Videos</p>
-              <p class="text-4xl font-bold text-[var(--ink-ivory)] mb-2">
-                <span class="countup glow-count" data-target="100" data-suffix="+">0</span>
-              </p>
-              <p class="text-sm text-gray-300">
-                Shot, edited & delivered for events and campaigns.
-              </p>
-            </div>
+  <div class="grid grid-cols-2 gap-x-8 gap-y-10 text-sm">
 
-            <!-- Organizations -->
-            <div>
-              <p class="text-xs uppercase tracking-wide text-gray-400 mb-1">Organizations</p>
-              <p class="text-4xl font-bold text-[var(--ink-gray)] mb-2">
-                <span class="countup" data-target="3">0</span>
-              </p>
-              <p class="text-sm text-gray-300">
-                Calvin Marketing, ASA, & Gospel Choir.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- VIDEOS -->
+    <div class="flex flex-col items-start gap-2">
+      <p class="text-xs uppercase tracking-wide text-gray-400">Videos</p>
+      <p class="text-4xl font-bold text-[var(--ink-ivory)] glow-count leading-none">
+        <span class="countup" data-target="100" data-suffix="+">0</span>
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        Shot, edited & delivered for events and campaigns.
+      </p>
+    </div>
+
+    <!-- ORGANIZATIONS -->
+    <div class="flex flex-col items-start gap-2">
+      <p class="text-xs uppercase tracking-wide text-gray-400">Organizations</p>
+      <p class="text-4xl font-bold text-[var(--ink-gray)] leading-none">
+        <span class="countup" data-target="3">0</span>
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        Calvin Marketing, ASA, & Gospel Choir.
+      </p>
+    </div>
+
+  </div>
+</div>
+
 
         <!-- ROLES / THE BIG 3 -->
     <section id="roles" class="py-20 px-4 sm:px-6 fade-section">
