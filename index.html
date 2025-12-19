@@ -103,6 +103,50 @@
     html {
       scroll-behavior: smooth;
     }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Smooth button hover */
+    .btn-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Enhanced card hover */
+    .glow-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Focus states for accessibility */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--ink-ivory);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* Smooth image loading */
+    img {
+      transition: transform 0.3s ease;
+    }
+    .reel-card:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Better text contrast */
+    .text-muted {
+      color: rgba(203, 203, 203, 0.7);
+    }
   </style>
 </head>
 <body class="font-sans" id="top">
@@ -114,34 +158,86 @@
   </div>
 
   <!-- NAVBAR -->
-  <header class="sticky top-0 z-30 bg-black/60 backdrop-blur border-b border-zinc-800">
+  <header class="sticky top-0 z-30 bg-black/60 backdrop-blur-md border-b border-zinc-800">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
-      <a href="#top" class="font-semibold tracking-tight text-lg flex items-center gap-2">
+      <a href="#top" class="font-semibold tracking-tight text-lg flex items-center gap-2 hover:opacity-80 transition">
         <span class="inline-flex h-7 w-7 items-center justify-center rounded-full pill text-xs text-white">O</span>
         <span>Ose<span class="text-[var(--ink-ivory)]"> A-Shadrach</span></span>
       </a>
 
       <nav class="hidden md:flex gap-6 text-sm text-gray-200">
-        <a href="#about" class="hover:text-[var(--ink-ivory)] transition">About</a>
-        <a href="#roles" class="hover:text-[var(--ink-ivory)] transition">Roles</a>
-        <a href="#projects" class="hover:text-[var(--ink-ivory)] transition">Case Studies</a>
-        <a href="#reels" class="hover:text-[var(--ink-ivory)] transition">Video Reels</a>
-        <a href="#contact" class="hover:text-[var(--ink-ivory)] transition">Contact</a>
+        <a href="#about" class="hover:text-[var(--ink-ivory)] transition relative group">
+          About
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--ink-ivory)] transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#roles" class="hover:text-[var(--ink-ivory)] transition relative group">
+          Roles
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--ink-ivory)] transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#projects" class="hover:text-[var(--ink-ivory)] transition relative group">
+          Case Studies
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--ink-ivory)] transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#reels" class="hover:text-[var(--ink-ivory)] transition relative group">
+          Video Reels
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--ink-ivory)] transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#contact" class="hover:text-[var(--ink-ivory)] transition relative group">
+          Contact
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--ink-ivory)] transition-all group-hover:w-full"></span>
+        </a>
       </nav>
 
-      <a
-        href="https://docs.google.com/document/d/1SiqDAvB-5smVrg8PYhKhx-sxiN1hpYkqfMSlNrYHKM8/export?format=pdf"
-        class="hidden md:inline-block pill px-4 py-2 rounded-full text-xs font-semibold shadow-md hover:brightness-110 transition"
-      >
-        Download Résumé
-      </a>
+      <div class="flex items-center gap-3">
+        <a
+          href="https://docs.google.com/document/d/1SiqDAvB-5smVrg8PYhKhx-sxiN1hpYkqfMSlNrYHKM8/export?format=pdf"
+          class="hidden md:inline-block pill px-4 py-2 rounded-full text-xs font-semibold shadow-md hover:brightness-110 transition btn-hover"
+        >
+          Download Résumé
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden p-2 text-gray-200 hover:text-[var(--ink-ivory)] transition"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
     </div>
+
+    <!-- Mobile menu -->
+    <nav
+      id="mobile-menu"
+      class="mobile-menu md:hidden fixed top-[57px] right-0 w-64 h-[calc(100vh-57px)] bg-black/95 backdrop-blur-md border-l border-zinc-800 p-6 z-20"
+      aria-label="Mobile navigation"
+    >
+      <div class="flex flex-col gap-4">
+        <a href="#about" class="text-gray-200 hover:text-[var(--ink-ivory)] transition py-2 border-b border-zinc-800" onclick="closeMobileMenu()">About</a>
+        <a href="#roles" class="text-gray-200 hover:text-[var(--ink-ivory)] transition py-2 border-b border-zinc-800" onclick="closeMobileMenu()">Roles</a>
+        <a href="#projects" class="text-gray-200 hover:text-[var(--ink-ivory)] transition py-2 border-b border-zinc-800" onclick="closeMobileMenu()">Case Studies</a>
+        <a href="#reels" class="text-gray-200 hover:text-[var(--ink-ivory)] transition py-2 border-b border-zinc-800" onclick="closeMobileMenu()">Video Reels</a>
+        <a href="#contact" class="text-gray-200 hover:text-[var(--ink-ivory)] transition py-2 border-b border-zinc-800" onclick="closeMobileMenu()">Contact</a>
+        <a
+          href="https://docs.google.com/document/d/1SiqDAvB-5smVrg8PYhKhx-sxiN1hpYkqfMSlNrYHKM8/export?format=pdf"
+          class="pill px-4 py-2 rounded-full text-xs font-semibold text-center mt-4 btn-hover"
+          onclick="closeMobileMenu()"
+        >
+          Download Résumé
+        </a>
+      </div>
+    </nav>
   </header>
 
   <main>
 
     <!-- HERO -->
-    <section class="min-h-[80vh] flex items-center px-4 sm:px-6">
+    <section class="min-h-[85vh] flex items-center px-4 sm:px-6 py-12">
       <div class="max-w-6xl mx-auto grid md:grid-cols-[1.3fr,1fr] gap-10 items-center fade-section">
         <div>
           <p class="uppercase tracking-[0.24em] text-xs text-[var(--ink-ivory)]/80 mb-4">
@@ -158,13 +254,13 @@
           <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <a
               href="#reels"
-              class="pill px-6 py-3 rounded-full font-semibold shadow-lg hover:brightness-110 transition text-center text-sm sm:text-base"
+              class="pill px-6 py-3 rounded-full font-semibold shadow-lg hover:brightness-110 transition text-center text-sm sm:text-base btn-hover"
             >
               ▶ Watch My Reels
             </a>
             <a
               href="#projects"
-              class="px-6 py-3 rounded-full font-semibold border border-[var(--ink-ivory)]/60 text-[var(--ink-ivory)] bg-black/40 hover:bg-white/5 transition text-center text-sm sm:text-base"
+              class="px-6 py-3 rounded-full font-semibold border border-[var(--ink-ivory)]/60 text-[var(--ink-ivory)] bg-black/40 hover:bg-white/5 transition text-center text-sm sm:text-base btn-hover"
             >
               View Case Studies
             </a>
@@ -203,9 +299,9 @@
     </section>
 
     <!-- ROLES / THE BIG 3 -->
-    <section id="roles" class="py-20 px-4 sm:px-6 fade-section">
+    <section id="roles" class="py-24 px-4 sm:px-6 fade-section">
       <div class="max-w-6xl mx-auto text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">The Big 3</h2>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-12 section-title">The Big 3</h2>
 
         <div class="grid md:grid-cols-3 gap-6 lg:gap-8 mt-4 text-left">
           <!-- Role 1 - Brighter ivory tint -->
@@ -287,10 +383,10 @@
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="py-20 px-4 sm:px-6 fade-section">
-      <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr,1fr] gap-10 items-center">
+    <section id="about" class="py-24 px-4 sm:px-6 fade-section">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr,1fr] gap-12 items-center">
         <div>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-6 section-title">The Story Behind the Camera</h2>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">The Story Behind the Camera</h2>
           <p class="text-gray-100 leading-relaxed mb-3 text-sm sm:text-base">
             I’m a marketing-minded creative who loves turning “regular campus stuff” into content that feels cinematic,
             personal, and deeply shareable.
@@ -317,10 +413,10 @@
     </section>
 
     <!-- CASE STUDIES -->
-    <section id="projects" class="py-20 px-4 sm:px-6 fade-section">
+    <section id="projects" class="py-24 px-4 sm:px-6 fade-section">
       <div class="max-w-6xl mx-auto text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-3 section-title">Selected Case Studies</h2>
-        <p class="text-sm text-gray-300 max-w-2xl mx-auto mb-10">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 section-title">Selected Case Studies</h2>
+        <p class="text-sm text-gray-300 max-w-2xl mx-auto mb-12">
           A snapshot of how I think about campaigns—from problem → idea → execution → impact.
         </p>
 
@@ -386,28 +482,30 @@
     </section>
 
     <!-- VIDEO REELS -->
-    <section id="reels" class="py-20 px-4 sm:px-6 fade-section">
+    <section id="reels" class="py-24 px-4 sm:px-6 fade-section">
       <div class="max-w-6xl mx-auto text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-3 section-title">Video Reels</h2>
-        <p class="text-sm text-gray-300 max-w-2xl mx-auto mb-10">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 section-title">Video Reels</h2>
+        <p class="text-sm text-gray-300 max-w-2xl mx-auto mb-12">
           Click through to see how I handle pacing, sound, and storytelling across different project types.
         </p>
 
         <div class="grid md:grid-cols-3 gap-6 lg:gap-8 text-left">
           <!-- Reel 1 -->
-          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3">
+          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
             <a
               href="https://www.instagram.com/reel/DOwWK6mFRjC/"
               target="_blank"
-              class="relative block group"
+              class="relative block group reel-card"
+              aria-label="Watch Calvin Hype / Campus Life Reel"
             >
               <img
                 src="calvin-reel.jpg"
                 alt="Calvin Hype / Campus Life Reel"
                 class="aspect-video w-full object-cover rounded-xl"
+                loading="lazy"
               />
-              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                <span class="pill text-xs font-semibold px-4 py-2 rounded-full">
+              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <span class="pill text-xs font-semibold px-4 py-2 rounded-full transform scale-90 group-hover:scale-100 transition-transform">
                   ▶ Play reel
                 </span>
               </div>
@@ -425,19 +523,21 @@
           </div>
 
           <!-- Reel 2 -->
-          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3">
+          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
             <a
               href="https://www.instagram.com/p/DRGZi_FjK4E/"
               target="_blank"
-              class="relative block group"
+              class="relative block group reel-card"
+              aria-label="Watch ASA Event / Mr & Miss ASA Reel"
             >
               <img
                 src="asa-reel.jpg"
                 alt="ASA Event / Mr & Miss ASA Reel"
                 class="aspect-video w-full object-cover rounded-xl"
+                loading="lazy"
               />
-              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                <span class="pill text-xs font-semibold px-4 py-2 rounded-full">
+              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <span class="pill text-xs font-semibold px-4 py-2 rounded-full transform scale-90 group-hover:scale-100 transition-transform">
                   ▶ Play reel
                 </span>
               </div>
@@ -455,19 +555,21 @@
           </div>
 
           <!-- Reel 3 -->
-          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3">
+          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
             <a
               href="https://www.instagram.com/p/DQ0cjkADW7k/"
               target="_blank"
-              class="relative block group"
+              class="relative block group reel-card"
+              aria-label="Watch Gospel Choir Performance Snippets Reel"
             >
               <img
                 src="choir-reel.jpg"
                 alt="Gospel Choir Performance Snippets Reel"
                 class="aspect-video w-full object-cover rounded-xl"
+                loading="lazy"
               />
-              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                <span class="pill text-xs font-semibold px-4 py-2 rounded-full">
+              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <span class="pill text-xs font-semibold px-4 py-2 rounded-full transform scale-90 group-hover:scale-100 transition-transform">
                   ▶ Play reel
                 </span>
               </div>
@@ -488,10 +590,10 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="py-20 px-4 sm:px-6 fade-section">
+    <section id="contact" class="py-24 px-4 sm:px-6 fade-section">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4 section-title">Let’s Build Something</h2>
-        <p class="text-sm sm:text-base text-gray-200 max-w-2xl mx-auto mb-8">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6 section-title">Let's Build Something</h2>
+        <p class="text-sm sm:text-base text-gray-200 max-w-2xl mx-auto mb-10">
           Need a campaign, content for an event, or someone to make your organization feel alive online?
           I’m open to collaborations, freelance projects, and future roles in marketing and creative production.
         </p>
@@ -500,21 +602,21 @@
         <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 mb-6">
           <a
             href="mailto:osemudia97@gmail.com"
-            class="pill px-6 py-3 rounded-full font-semibold shadow-lg hover:brightness-110 transition w-full sm:w-auto text-sm sm:text-base"
+            class="pill px-6 py-3 rounded-full font-semibold shadow-lg hover:brightness-110 transition w-full sm:w-auto text-sm sm:text-base btn-hover"
           >
             Email Me
           </a>
           <a
             href="https://www.linkedin.com/in/ose-a-shadrach/"
             target="_blank"
-            class="px-6 py-3 rounded-full font-semibold border border-[var(--ink-ivory)]/60 text-[var(--ink-ivory)] bg-black/40 hover:bg-white/5 transition w-full sm:w-auto text-sm sm:text-base"
+            class="px-6 py-3 rounded-full font-semibold border border-[var(--ink-ivory)]/60 text-[var(--ink-ivory)] bg-black/40 hover:bg-white/5 transition w-full sm:w-auto text-sm sm:text-base btn-hover"
           >
             Connect on LinkedIn
           </a>
           <a
             href="https://calvincollege-my.sharepoint.com/:f:/g/personal/ona3_calvin_edu/EnXmvyNZ2NVApEVMSnub1foBTKJM2cCMxc11g8tL5JWP_A?e=mj19Td"
             target="_blank"
-            class="px-6 py-3 rounded-full font-semibold border border-[var(--ink-slate)]/70 text-[var(--ink-ivory)] bg-black/30 hover:bg-white/5 transition w-full sm:w-auto text-sm sm:text-base"
+            class="px-6 py-3 rounded-full font-semibold border border-[var(--ink-slate)]/70 text-[var(--ink-ivory)] bg-black/30 hover:bg-white/5 transition w-full sm:w-auto text-sm sm:text-base btn-hover"
           >
             View More Work
           </a>
@@ -535,6 +637,37 @@
   <script>
     // Auto year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = document.getElementById("menu-icon");
+    const closeIcon = document.getElementById("close-icon");
+
+    function toggleMobileMenu() {
+      const isOpen = mobileMenu.classList.toggle("open");
+      mobileMenuBtn.setAttribute("aria-expanded", isOpen);
+      menuIcon.classList.toggle("hidden", isOpen);
+      closeIcon.classList.toggle("hidden", !isOpen);
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove("open");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
+      menuIcon.classList.remove("hidden");
+      closeIcon.classList.add("hidden");
+    }
+
+    mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+
+    // Close mobile menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        if (mobileMenu.classList.contains("open")) {
+          closeMobileMenu();
+        }
+      }
+    });
 
     // Fade-in on scroll
     const observer = new IntersectionObserver(
