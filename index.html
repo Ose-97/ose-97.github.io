@@ -8,25 +8,24 @@
 
   <style>
     :root {
-      --ink-charcoal: #1a1a1a;
-      --primary-blue: #3B82F6;
-      --primary-blue-dark: #2563EB;
-      --accent-brown: #A78B5B;
-      --accent-brown-light: #D4A574;
+      --ink-charcoal: #0a0a0a;
+      --primary-blue: #4A90E2;
+      --primary-blue-dark: #2E5C8A;
+      --accent-brown: #C9A961;
+      --accent-brown-light: #E8D5A3;
       --accent-brown-dark: #8B6F47;
       --accent-white: #FFFFFF;
-      --accent-cream: #F5F1E8;
-      --text-light: #F5F5F5;
-      --text-muted: #A3A3A3;
+      --accent-cream: #FFF8E7;
+      --text-light: #FFFFFF;
+      --text-muted: #B8B8B8;
     }
 
-    /* Warm earth-tone gradient background */
+    /* Solid dark background with subtle accents */
     body {
       background: 
-        radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.12) 0, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(167, 139, 91, 0.15) 0, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(212, 165, 116, 0.08) 0, transparent 50%),
-        linear-gradient(135deg, #1a1a1a 0%, #2a2520 50%, #1a1a1a 100%);
+        radial-gradient(circle at 20% 30%, rgba(74, 144, 226, 0.08) 0, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(201, 169, 97, 0.1) 0, transparent 50%),
+        #0a0a0a;
       color: var(--text-light);
       overflow-x: hidden;
       min-height: 100vh;
@@ -63,37 +62,39 @@
       transform: translateY(0);
     }
 
-    /* Warm card glow */
+    /* Solid cards with strong borders */
     .glow-card {
+      background: rgba(20, 20, 20, 0.95) !important;
       box-shadow:
-        0 0 0 1px rgba(59, 130, 246, 0.2),
-        0 18px 40px rgba(0, 0, 0, 0.8),
-        0 0 40px rgba(167, 139, 91, 0.1);
+        0 0 0 1px rgba(74, 144, 226, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.6);
       border-radius: 1rem;
+      backdrop-filter: none;
     }
     .glow-card:hover {
+      background: rgba(25, 25, 25, 0.98) !important;
       box-shadow:
-        0 0 0 1px rgba(59, 130, 246, 0.4),
-        0 22px 60px rgba(0, 0, 0, 0.9),
-        0 0 60px rgba(167, 139, 91, 0.2);
+        0 0 0 2px rgba(74, 144, 226, 0.6),
+        0 12px 48px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(74, 144, 226, 0.2);
       transform: translateY(-4px);
     }
 
-    /* Blue and white gradient buttons */
+    /* Solid blue buttons */
     .pill {
-      background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+      background: var(--primary-blue);
       color: var(--accent-white);
       font-weight: 600;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
     }
     .pill:hover {
-      background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+      background: var(--primary-blue-dark);
+      box-shadow: 0 6px 30px rgba(74, 144, 226, 0.6);
     }
 
-    /* Blue, white, and brown hero gradient text */
+    /* Clean blue and white hero gradient text */
     .hero-gradient {
-      background: linear-gradient(120deg, var(--primary-blue), var(--accent-white), var(--accent-brown-light), var(--primary-blue-dark));
+      background: linear-gradient(120deg, var(--primary-blue), var(--accent-white), var(--primary-blue));
       background-size: 200% 200%;
       -webkit-background-clip: text;
       background-clip: text;
@@ -121,20 +122,20 @@
       transform: translateX(-50%);
       width: 80px;
       height: 3px;
-      background: linear-gradient(90deg, var(--primary-blue), var(--accent-white), var(--accent-brown));
+      background: linear-gradient(90deg, var(--primary-blue), var(--accent-white));
       border-radius: 2px;
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 12px rgba(74, 144, 226, 0.6);
     }
 
-    /* Blue glow pulse for 100+ */
+    /* Strong blue glow pulse for 100+ */
     @keyframes glowPulse {
       0%, 100% {
-        text-shadow: 0 0 0 rgba(59, 130, 246, 0);
+        text-shadow: 0 0 0 rgba(74, 144, 226, 0);
       }
       50% {
         text-shadow: 
-          0 0 20px rgba(59, 130, 246, 0.8),
-          0 0 30px rgba(255, 255, 255, 0.4);
+          0 0 25px rgba(74, 144, 226, 1),
+          0 0 40px rgba(74, 144, 226, 0.6);
       }
     }
 
@@ -202,11 +203,11 @@
   </div>
 
   <!-- NAVBAR -->
-  <header class="sticky top-0 z-30 bg-black/60 backdrop-blur-md border-b border-zinc-800">
+  <header class="sticky top-0 z-30 bg-[rgba(10,10,10,0.95)] backdrop-blur-md border-b border-zinc-700">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
       <a href="#top" class="font-semibold tracking-tight text-lg flex items-center gap-2 hover:opacity-80 transition">
         <span class="inline-flex h-7 w-7 items-center justify-center rounded-full pill text-xs text-white">O</span>
-        <span>Ose<span class="bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-brown-light)] bg-clip-text text-transparent"> A-Shadrach</span></span>
+        <span>Ose<span class="text-[var(--primary-blue)]"> A-Shadrach</span></span>
       </a>
 
       <nav class="hidden md:flex gap-6 text-sm text-gray-200">
@@ -258,7 +259,7 @@
     <!-- Mobile menu -->
     <nav
       id="mobile-menu"
-      class="mobile-menu md:hidden fixed top-[57px] right-0 w-64 h-[calc(100vh-57px)] bg-black/95 backdrop-blur-md border-l border-zinc-800 p-6 z-20"
+      class="mobile-menu md:hidden fixed top-[57px] right-0 w-64 h-[calc(100vh-57px)] bg-[rgba(10,10,10,0.98)] backdrop-blur-md border-l border-zinc-700 p-6 z-20"
       aria-label="Mobile navigation"
     >
       <div class="flex flex-col gap-4">
@@ -284,7 +285,7 @@
     <section class="min-h-[85vh] flex items-center px-4 sm:px-6 py-12">
       <div class="max-w-6xl mx-auto grid md:grid-cols-[1.3fr,1fr] gap-10 items-center fade-section">
         <div>
-          <p class="uppercase tracking-[0.24em] text-xs bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-brown-light)] bg-clip-text text-transparent mb-4">
+          <p class="uppercase tracking-[0.24em] text-xs text-[var(--accent-brown-light)] mb-4">
             Marketing & Communication Videographer · ASA Creative Director · Gospel Choir Social Media Manager
           </p>
 
@@ -312,14 +313,14 @@
         </div>
 
         <!-- At a Glance card -->
-        <div class="glow-card bg-black/70 border border-zinc-800 rounded-2xl p-8 md:p-10 flex flex-col gap-6">
+        <div class="glow-card border border-zinc-700 rounded-2xl p-8 md:p-10 flex flex-col gap-6">
           <h2 class="text-lg font-semibold mb-4">At a Glance</h2>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
             <!-- Videos -->
             <div>
               <p class="text-xs uppercase tracking-wide text-gray-400 mb-1">Videos</p>
-              <p class="text-4xl font-bold bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-white)] bg-clip-text text-transparent mb-2">
+              <p class="text-4xl font-bold text-[var(--primary-blue)] mb-2">
                 <span class="countup glow-count" data-target="100" data-suffix="+">0</span>
               </p>
               <p class="text-sm text-gray-300">
@@ -330,7 +331,7 @@
             <!-- Organizations -->
             <div>
               <p class="text-xs uppercase tracking-wide text-gray-400 mb-1">Organizations</p>
-              <p class="text-4xl font-bold bg-gradient-to-r from-[var(--accent-brown-light)] to-[var(--accent-brown)] bg-clip-text text-transparent mb-2">
+              <p class="text-4xl font-bold text-[var(--accent-brown-light)] mb-2">
                 <span class="countup" data-target="3">0</span>
               </p>
               <p class="text-sm text-gray-300">
@@ -348,20 +349,15 @@
         <h2 class="text-3xl sm:text-4xl font-bold mb-12 section-title">The Big 3</h2>
 
         <div class="grid md:grid-cols-3 gap-6 lg:gap-8 mt-4 text-left">
-          <!-- Role 1 - Blue gradient -->
+          <!-- Role 1 - Blue accent -->
           <div
             class="glow-card p-6 md:p-8 hover:-translate-y-1 transition-transform"
             style="
-              background: linear-gradient(
-                145deg,
-                rgba(59, 130, 246, 0.2),
-                rgba(255, 255, 255, 0.1),
-                rgba(15, 23, 42, 0.95)
-              );
-              border: 1px solid rgba(59, 130, 246, 0.4);
+              background: rgba(20, 20, 20, 0.95);
+              border: 2px solid rgba(74, 144, 226, 0.5);
             "
           >
-            <p class="text-xs font-semibold bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-white)] bg-clip-text text-transparent tracking-wide mb-2">01</p>
+            <p class="text-xs font-semibold text-[var(--primary-blue)] tracking-wide mb-2">01</p>
             <h3 class="text-xl font-semibold mb-2 text-white">
               Marketing & Communication Student Videographer
             </h3>
@@ -374,20 +370,15 @@
             </p>
           </div>
 
-          <!-- Role 2 - Brown gradient -->
+          <!-- Role 2 - Brown accent -->
           <div
             class="glow-card p-6 md:p-8 hover:-translate-y-1 transition-transform"
             style="
-              background: linear-gradient(
-                145deg,
-                rgba(167, 139, 91, 0.25),
-                rgba(212, 165, 116, 0.15),
-                rgba(15, 23, 42, 0.95)
-              );
-              border: 1px solid rgba(167, 139, 91, 0.5);
+              background: rgba(20, 20, 20, 0.95);
+              border: 2px solid rgba(201, 169, 97, 0.6);
             "
           >
-            <p class="text-xs font-semibold bg-gradient-to-r from-[var(--accent-brown-light)] to-[var(--accent-brown)] bg-clip-text text-transparent tracking-wide mb-2">02</p>
+            <p class="text-xs font-semibold text-[var(--accent-brown-light)] tracking-wide mb-2">02</p>
             <h3 class="text-xl font-semibold mb-2 text-white">
               Creative Director · African Students Association
             </h3>
@@ -400,20 +391,15 @@
             </p>
           </div>
 
-          <!-- Role 3 - Blue/Brown gradient -->
+          <!-- Role 3 - Blue accent -->
           <div
             class="glow-card p-6 md:p-8 hover:-translate-y-1 transition-transform"
             style="
-              background: linear-gradient(
-                145deg,
-                rgba(59, 130, 246, 0.15),
-                rgba(167, 139, 91, 0.2),
-                rgba(15, 23, 42, 0.95)
-              );
-              border: 1px solid rgba(212, 165, 116, 0.4);
+              background: rgba(20, 20, 20, 0.95);
+              border: 2px solid rgba(74, 144, 226, 0.5);
             "
           >
-            <p class="text-xs font-semibold bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-brown-light)] bg-clip-text text-transparent tracking-wide mb-2">03</p>
+            <p class="text-xs font-semibold text-[var(--primary-blue)] tracking-wide mb-2">03</p>
             <h3 class="text-xl font-semibold mb-2 text-white">
               Social Media Manager · Gospel Choir
             </h3>
@@ -444,10 +430,10 @@
           </p>
           <p class="text-gray-300 text-sm leading-relaxed">
             Whether it’s a 15-second reel or a full event campaign, my goal is simple:
-            make your audience feel something <span class="bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-brown-light)] bg-clip-text text-transparent font-medium">and</span> do something—click, share, show up, or sing along.
+            make your audience feel something <span class="text-[var(--primary-blue)] font-medium">and</span> do something—click, share, show up, or sing along.
           </p>
         </div>
-        <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-6 text-sm text-gray-200">
+        <div class="glow-card border border-zinc-700 rounded-2xl p-6 text-sm text-gray-200">
           <h3 class="font-semibold mb-3 text-lg">What I Bring</h3>
           <ul class="space-y-2 list-disc list-inside">
             <li>Shot & edited 100+ videos for events, promos, and social.</li>
@@ -469,9 +455,9 @@
 
         <div class="grid md:grid-cols-3 gap-6 lg:gap-8 text-left">
           <!-- Case 1 -->
-          <article class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between">
+          <article class="glow-card border border-zinc-700 rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <h3 class="text-xl font-semibold mb-2 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-white)] bg-clip-text text-transparent">
+              <h3 class="text-xl font-semibold mb-2 text-[var(--primary-blue)]">
                 Music at Calvin Promotion
               </h3>
               <p class="text-gray-400 text-xs mb-3">
@@ -488,9 +474,9 @@
           </article>
 
           <!-- Case 2 -->
-          <article class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between">
+          <article class="glow-card border border-zinc-700 rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <h3 class="text-xl font-semibold mb-2 bg-gradient-to-r from-[var(--accent-brown-light)] to-[var(--accent-brown)] bg-clip-text text-transparent">
+              <h3 class="text-xl font-semibold mb-2 text-[var(--accent-brown-light)]">
                 ASA "Mr & Miss ASA" Campaign
               </h3>
               <p class="text-gray-400 text-xs mb-3">
@@ -507,9 +493,9 @@
           </article>
 
           <!-- Case 3 -->
-          <article class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between">
+          <article class="glow-card border border-zinc-700 rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <h3 class="text-xl font-semibold mb-2 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-brown-light)] bg-clip-text text-transparent">
+              <h3 class="text-xl font-semibold mb-2 text-[var(--primary-blue)]">
                 Gospel Choir Social Refresh
               </h3>
               <p class="text-gray-400 text-xs mb-3">
@@ -538,7 +524,7 @@
 
         <div class="grid md:grid-cols-3 gap-6 lg:gap-8 text-left">
           <!-- Reel 1 -->
-          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
+          <div class="glow-card border border-zinc-700 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
             <a
               href="https://www.instagram.com/reel/DOwWK6mFRjC/"
               target="_blank"
@@ -558,7 +544,7 @@
               </div>
             </a>
             <div>
-              <h3 class="font-semibold text-sm mb-1 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-white)] bg-clip-text text-transparent">Calvin Hype / Campus Life Reel</h3>
+              <h3 class="font-semibold text-sm mb-1 text-[var(--primary-blue)]">Calvin Hype / Campus Life Reel</h3>
               <a
                 href="https://www.instagram.com/reel/DOwWK6mFRjC/"
                 target="_blank"
@@ -570,7 +556,7 @@
           </div>
 
           <!-- Reel 2 -->
-          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
+          <div class="glow-card border border-zinc-700 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
             <a
               href="https://www.instagram.com/p/DRGZi_FjK4E/"
               target="_blank"
@@ -590,7 +576,7 @@
               </div>
             </a>
             <div>
-              <h3 class="font-semibold text-sm mb-1 bg-gradient-to-r from-[var(--accent-brown-light)] to-[var(--accent-brown)] bg-clip-text text-transparent">ASA Event / Mr & Miss ASA</h3>
+              <h3 class="font-semibold text-sm mb-1 text-[var(--accent-brown-light)]">ASA Event / Mr & Miss ASA</h3>
               <a
                 href="https://www.instagram.com/p/DRGZi_FjK4E/"
                 target="_blank"
@@ -602,7 +588,7 @@
           </div>
 
           <!-- Reel 3 -->
-          <div class="glow-card bg-[rgba(0,0,0,0.75)] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
+          <div class="glow-card border border-zinc-700 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
             <a
               href="https://www.instagram.com/p/DQ0cjkADW7k/"
               target="_blank"
@@ -622,7 +608,7 @@
               </div>
             </a>
             <div>
-              <h3 class="font-semibold text-sm mb-1 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-brown-light)] bg-clip-text text-transparent">Gospel Choir Performance Snippets</h3>
+              <h3 class="font-semibold text-sm mb-1 text-[var(--primary-blue)]">Gospel Choir Performance Snippets</h3>
               <a
                 href="https://www.instagram.com/p/DQ0cjkADW7k/"
                 target="_blank"
@@ -677,7 +663,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-zinc-800 py-5 text-center text-[11px] text-gray-400 bg-black/70">
+  <footer class="border-t border-zinc-700 py-5 text-center text-[11px] text-gray-400 bg-[rgba(10,10,10,0.95)]">
     © <span id="year"></span> Ose Aisuodionoe-Shadrach · Built with GitHub Pages & Tailwind
   </footer>
 
