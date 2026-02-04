@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -191,6 +192,42 @@
     .text-muted {
       color: rgba(203, 203, 203, 0.7);
     }
+
+    /* Profile image styling */
+    .profile-image {
+      border-radius: 1rem;
+      object-fit: cover;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      border: 2px solid rgba(74, 144, 226, 0.3);
+      transition: all 0.4s ease;
+    }
+    .profile-image:hover {
+      transform: scale(1.02);
+      border-color: rgba(74, 144, 226, 0.6);
+      box-shadow: 0 12px 48px rgba(74, 144, 226, 0.2);
+    }
+
+    .hero-image {
+      border-radius: 1.5rem;
+      object-fit: cover;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+      border: 2px solid rgba(74, 144, 226, 0.4);
+    }
+
+    /* Logo styling for role cards */
+    .role-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+      transition: all 0.3s ease;
+      filter: brightness(1.1);
+    }
+    .glow-card:hover .role-logo {
+      opacity: 1;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body class="font-sans" id="top">
@@ -313,7 +350,16 @@
         </div>
 
         <!-- At a Glance card -->
-        <div class="glow-card border border-zinc-700 rounded-2xl p-8 md:p-10 flex flex-col gap-6">
+        <div class="glow-card border border-zinc-700 rounded-2xl p-8 md:p-10 flex flex-col gap-6 relative overflow-hidden">
+          <!-- Hero Image - Camera Photo -->
+          <div class="absolute top-0 right-0 w-32 h-32 md:w-40 md:h-40 opacity-20 -mr-8 -mt-8">
+            <img 
+              src="ose-camera.jpg" 
+              alt="Ose with camera" 
+              class="w-full h-full object-cover rounded-full border-2 border-[var(--primary-blue)]/30"
+              loading="lazy"
+            />
+          </div>
           <h2 class="text-lg font-semibold mb-4">At a Glance</h2>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
@@ -344,7 +390,16 @@
     </section>
 
     <!-- ROLES / THE BIG 3 -->
-    <section id="roles" class="py-24 px-4 sm:px-6 fade-section">
+    <section id="roles" class="py-24 px-4 sm:px-6 fade-section relative">
+      <!-- Decorative Camera Image -->
+      <div class="hidden lg:block absolute top-20 right-8 w-24 h-24 opacity-10 -z-10">
+        <img 
+          src="ose-camera.jpg" 
+          alt="Ose with camera" 
+          class="w-full h-full object-cover rounded-full border-2 border-[var(--primary-blue)]/20"
+          loading="lazy"
+        />
+      </div>
       <div class="max-w-6xl mx-auto text-center">
         <h2 class="text-3xl sm:text-4xl font-bold mb-12 section-title">The Big 3</h2>
 
@@ -357,13 +412,23 @@
               border: 2px solid rgba(74, 144, 226, 0.5);
             "
           >
-            <p class="text-xs font-semibold text-[var(--primary-blue)] tracking-wide mb-2">01</p>
-            <h3 class="text-xl font-semibold mb-2 text-white">
-              Marketing & Communication Student Videographer
-            </h3>
-            <p class="text-xs text-gray-200 mb-3">
-              Calvin University
-            </p>
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex-1">
+                <p class="text-xs font-semibold text-[var(--primary-blue)] tracking-wide mb-2">01</p>
+                <h3 class="text-xl font-semibold mb-2 text-white">
+                  Marketing & Communication Student Videographer
+                </h3>
+                <p class="text-xs text-gray-200 mb-3">
+                  Calvin University
+                </p>
+              </div>
+              <img 
+                src="calvin-logo.png" 
+                alt="Calvin University Logo" 
+                class="role-logo ml-4"
+                loading="lazy"
+              />
+            </div>
             <p class="text-gray-100 text-sm leading-relaxed">
               Concept, shoot, and edit promotional pieces from hype reels to heartfelt stories 
               that support admissions, events, and campus campaigns.
@@ -378,13 +443,23 @@
               border: 2px solid rgba(201, 169, 97, 0.6);
             "
           >
-            <p class="text-xs font-semibold text-[var(--accent-brown-light)] tracking-wide mb-2">02</p>
-            <h3 class="text-xl font-semibold mb-2 text-white">
-              Creative Director · African Students Association
-            </h3>
-            <p class="text-xs text-gray-200 mb-3">
-              Calvin University
-            </p>
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex-1">
+                <p class="text-xs font-semibold text-[var(--accent-brown-light)] tracking-wide mb-2">02</p>
+                <h3 class="text-xl font-semibold mb-2 text-white">
+                  Creative Director · African Students Association
+                </h3>
+                <p class="text-xs text-gray-200 mb-3">
+                  Calvin University
+                </p>
+              </div>
+              <img 
+                src="asa-logo.png" 
+                alt="ASA Logo" 
+                class="role-logo ml-4"
+                loading="lazy"
+              />
+            </div>
             <p class="text-gray-100 text-sm leading-relaxed">
               Lead visual identity, event branding, posters, and digital campaigns that celebrate
               African culture and consistently pack the room.
@@ -399,13 +474,23 @@
               border: 2px solid rgba(74, 144, 226, 0.5);
             "
           >
-            <p class="text-xs font-semibold text-[var(--primary-blue)] tracking-wide mb-2">03</p>
-            <h3 class="text-xl font-semibold mb-2 text-white">
-              Social Media Manager · Gospel Choir
-            </h3>
-            <p class="text-xs text-gray-200 mb-3">
-              Calvin University Gospel Choir
-            </p>
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex-1">
+                <p class="text-xs font-semibold text-[var(--primary-blue)] tracking-wide mb-2">03</p>
+                <h3 class="text-xl font-semibold mb-2 text-white">
+                  Social Media Manager · Gospel Choir
+                </h3>
+                <p class="text-xs text-gray-200 mb-3">
+                  Calvin University Gospel Choir
+                </p>
+              </div>
+              <img 
+                src="gospel-choir-logo.png" 
+                alt="Gospel Choir Logo" 
+                class="role-logo ml-4"
+                loading="lazy"
+              />
+            </div>
             <p class="text-gray-100 text-sm leading-relaxed">
               Build content calendars, capture performances & behind-the-scenes moments,
               and translate the choir’s sound into a visual brand.
@@ -418,7 +503,16 @@
     <!-- ABOUT -->
     <section id="about" class="py-24 px-4 sm:px-6 fade-section">
       <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr,1fr] gap-12 items-center">
-        <div>
+        <div class="relative">
+          <!-- Portrait Image -->
+          <div class="hidden md:block absolute -left-8 top-0 w-48 h-64 opacity-30 -z-10">
+            <img 
+              src="ose-portrait.jpg" 
+              alt="Ose portrait" 
+              class="w-full h-full object-cover rounded-2xl profile-image"
+              loading="lazy"
+            />
+          </div>
           <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">The Story Behind the Camera</h2>
           <p class="text-gray-100 leading-relaxed mb-3 text-sm sm:text-base">
             I’m a marketing-minded creative who loves turning “regular campus stuff” into content that feels cinematic,
@@ -433,7 +527,16 @@
             make your audience feel something <span class="text-[var(--primary-blue)] font-medium">and</span> do something—click, share, show up, or sing along.
           </p>
         </div>
-        <div class="glow-card border border-zinc-700 rounded-2xl p-6 text-sm text-gray-200">
+        <div class="glow-card border border-zinc-700 rounded-2xl p-6 text-sm text-gray-200 relative overflow-hidden">
+          <!-- Portrait Image in Card -->
+          <div class="mb-6 -mx-6 -mt-6">
+            <img 
+              src="ose-portrait.jpg" 
+              alt="Ose portrait" 
+              class="w-full h-48 object-cover profile-image rounded-t-2xl"
+              loading="lazy"
+            />
+          </div>
           <h3 class="font-semibold mb-3 text-lg">What I Bring</h3>
           <ul class="space-y-2 list-disc list-inside">
             <li>Shot & edited 100+ videos for events, promos, and social.</li>
@@ -488,14 +591,14 @@
               </p>
             </div>
             <p class="mt-4 text-[11px] text-gray-400">
-              Averaged over 100k views via the social media campaign, getting over 100 ticket sales.
+              Averaged over 110k views via the social media campaign, getting over 150 ticket sales.
             </p>
           </article>
 
           <!-- Case 3 -->
           <article class="glow-card border border-zinc-700 rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <h3 class="text-xl font-semibold mb-2 text-[var(--primary-blue)]">
+              <h3 class="text-xl font-semibold mb-2 text-[var(--ink-slate)]">
                 Gospel Choir Social Refresh
               </h3>
               <p class="text-gray-400 text-xs mb-3">
@@ -618,6 +721,38 @@
               </a>
             </div>
           </div>
+
+          <!-- Reel 4 -->
+          <div class="glow-card border border-zinc-700 rounded-2xl p-4 flex flex-col gap-3 overflow-hidden">
+            <a
+              href="https://www.instagram.com/p/DS9ONAsDV5C/"
+              target="_blank"
+              class="relative block group reel-card"
+              aria-label="Watch Gospel Choir Live Performance Reel"
+            >
+              <img
+                src="gospel-choir-live.jpg"
+                alt="Gospel Choir Live Performance Reel"
+                class="aspect-video w-full object-cover rounded-xl"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 rounded-xl bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <span class="pill text-xs font-semibold px-4 py-2 rounded-full transform scale-90 group-hover:scale-100 transition-transform">
+                  ▶ Play reel
+                </span>
+              </div>
+            </a>
+            <div>
+              <h3 class="font-semibold text-sm mb-1 text-[var(--accent-brown-light)]">Gospel Choir Live Performance</h3>
+              <a
+                href="https://www.instagram.com/p/DS9ONAsDV5C/"
+                target="_blank"
+                class="text-[var(--accent-brown-light)] text-xs hover:text-[var(--accent-white)] hover:underline transition"
+              >
+                Watch reel →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -631,7 +766,7 @@
           I’m open to collaborations, freelance projects, and future roles in marketing and creative production.
         </p>
 
-        <!-- THREE BUTTONS -->
+        <!-- CONTACT BUTTONS -->
         <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 mb-6">
           <a
             href="mailto:osemudia97@gmail.com"
@@ -645,13 +780,6 @@
             class="px-6 py-3 rounded-full font-semibold border border-[var(--primary-blue)]/60 text-[var(--primary-blue)] bg-black/40 hover:bg-[var(--primary-blue)]/10 hover:border-[var(--primary-blue)] transition w-full sm:w-auto text-sm sm:text-base btn-hover"
           >
             Connect on LinkedIn
-          </a>
-          <a
-            href="https://calvincollege-my.sharepoint.com/:f:/g/personal/ona3_calvin_edu/EnXmvyNZ2NVApEVMSnub1foBTKJM2cCMxc11g8tL5JWP_A?e=mj19Td"
-            target="_blank"
-            class="px-6 py-3 rounded-full font-semibold border border-[var(--accent-brown)]/70 text-[var(--accent-brown-light)] bg-black/30 hover:bg-[var(--accent-brown)]/10 hover:border-[var(--accent-brown-light)] transition w-full sm:w-auto text-sm sm:text-base btn-hover"
-          >
-            View More Work
           </a>
         </div>
 

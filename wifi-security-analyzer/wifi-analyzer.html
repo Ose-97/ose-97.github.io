@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wi-Fi Security Analyzer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyber-green: #00ff88;
+      --cyber-cyan: #00d9ff;
+      --cyber-purple: #b026ff;
+      --cyber-red: #ff3366;
+      --cyber-yellow: #ffd700;
+      --dark-bg: #0a0e27;
+      --dark-card: #0f1629;
+      --dark-border: #1a2332;
+    }
+
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: var(--dark-bg);
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.03) 0%, transparent 50%),
+        linear-gradient(180deg, var(--dark-bg) 0%, #050811 100%);
+      color: #e0e7ff;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated grid background */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.3;
+      z-index: 0;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    /* Terminal-style header */
+    .terminal-header {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 8px 8px 0 0;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: var(--cyber-red); }
+    .dot-yellow { background: var(--cyber-yellow); }
+    .dot-green { background: var(--cyber-green); }
+
+    /* Cyber card */
+    .cyber-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .cyber-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyber-green), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cyber-card:hover {
+      border-color: var(--cyber-green);
+      box-shadow: 
+        0 0 20px rgba(0, 255, 136, 0.1),
+        inset 0 0 20px rgba(0, 255, 136, 0.05);
+    }
+
+    .cyber-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Scan button */
+    .scan-btn {
+      background: linear-gradient(135deg, var(--cyber-green), var(--cyber-cyan));
+      color: var(--dark-bg);
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .scan-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .scan-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .scan-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+    }
+
+    .scan-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Security badges */
+    .security-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .security-excellent {
+      background: rgba(0, 255, 136, 0.15);
+      color: var(--cyber-green);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .security-good {
+      background: rgba(0, 217, 255, 0.15);
+      color: var(--cyber-cyan);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+    }
+
+    .security-weak {
+      background: rgba(255, 211, 0, 0.15);
+      color: var(--cyber-yellow);
+      border: 1px solid rgba(255, 211, 0, 0.3);
+    }
+
+    .security-poor {
+      background: rgba(255, 51, 102, 0.15);
+      color: var(--cyber-red);
+      border: 1px solid rgba(255, 51, 102, 0.3);
+    }
+
+    /* Loading spinner */
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(0, 255, 136, 0.1);
+      border-top-color: var(--cyber-green);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Signal bars */
+    .signal-bars {
+      display: inline-flex;
+      gap: 3px;
+      align-items: flex-end;
+    }
+
+    .signal-bar {
+      width: 5px;
+      background: rgba(0, 255, 136, 0.2);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .signal-bar.active {
+      background: var(--cyber-green);
+      box-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+    }
+
+    /* Network card */
+    .network-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .network-card:hover {
+      border-color: var(--cyber-cyan);
+      transform: translateX(4px);
+      box-shadow: -4px 0 0 var(--cyber-cyan);
+    }
+
+    /* Monospace for technical data */
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+    }
+
+    /* Warning banner */
+    .warning-banner {
+      background: rgba(255, 211, 0, 0.1);
+      border: 1px solid rgba(255, 211, 0, 0.3);
+      border-left: 4px solid var(--cyber-yellow);
+      border-radius: 6px;
+      padding: 1rem;
+    }
+
+    /* Glitch effect for title */
+    .glitch {
+      position: relative;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Fade in animation */
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Status indicator */
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyber-green);
+      box-shadow: 0 0 8px var(--cyber-green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--dark-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--dark-border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cyber-green);
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated grid background -->
+  <div class="grid-bg"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 relative z-10">
+    <!-- Header -->
+    <header class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="status-indicator"></div>
+        <span class="mono text-sm text-cyan-400">SYSTEM ONLINE</span>
+      </div>
+      <h1 class="glitch text-4xl sm:text-5xl lg:text-6xl font-bold mb-3">
+        <span class="text-cyan-400">&gt;</span> 
+        <span class="text-green-400">Wi-Fi</span>
+        <span class="text-cyan-400"> Security</span>
+        <span class="text-purple-400"> Analyzer</span>
+      </h1>
+      <p class="text-gray-400 mono text-sm">
+        [SCAN] Analyze nearby wireless networks for security vulnerabilities and encryption protocols
+      </p>
+    </header>
+
+    <!-- Warning Banner -->
+    <div class="warning-banner mb-6 fade-in">
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+        <div>
+          <p class="font-semibold text-yellow-400 mb-1 mono text-sm">[WARNING] ETHICAL USE ONLY</p>
+          <p class="text-gray-300 text-sm">This tool is for educational purposes. Only scan networks you own or have explicit permission to analyze.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="cyber-card p-6 mb-6 fade-in">
+      <div class="terminal-header mb-4">
+        <div class="terminal-dot dot-red"></div>
+        <div class="terminal-dot dot-yellow"></div>
+        <div class="terminal-dot dot-green"></div>
+        <span class="ml-2 text-gray-400">network_scanner.exe</span>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+        <div class="flex-1">
+          <h2 class="text-lg font-semibold mb-2 text-cyan-400 mono">[CONTROL PANEL]</h2>
+          <p class="text-gray-400 text-sm">Initialize network scan to discover available access points</p>
+        </div>
+        <button
+          id="scan-btn"
+          class="scan-btn relative"
+          onclick="scanNetworks()"
+        >
+          <span id="scan-btn-text" class="relative z-10">▶ SCAN</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Area -->
+    <div id="results-container" class="hidden">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold text-cyan-400 mono">[SCAN RESULTS]</h2>
+        <span id="network-count" class="text-sm text-gray-500 mono"></span>
+      </div>
+      <div id="networks-list" class="space-y-3"></div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading" class="hidden">
+      <div class="cyber-card p-12 text-center">
+        <div class="loading-spinner mb-4"></div>
+        <p class="text-gray-300 mono">[SCANNING] Discovering wireless networks...</p>
+        <p class="text-sm text-gray-500 mt-2 mono">Please wait while the scan completes</p>
+      </div>
+    </div>
+
+    <!-- Info Sections -->
+    <div class="grid md:grid-cols-2 gap-6 mt-8">
+      <!-- Security Ratings -->
+      <div class="cyber-card p-6 fade-in">
+        <div class="terminal-header mb-4">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+          <span class="ml-2 text-gray-400">security_protocols.txt</span>
+        </div>
+        <h3 class="text-lg font-semibold mb-4 text-cyan-400 mono">[SECURITY RATINGS]</h3>
+        <div class="space-y-3 text-sm">
+          <div class="flex items-start gap-3">
+            <span class="security-badge security-excellent">WPA3</span>
+            <p class="text-gray-400 flex-1">Latest encryption standard with enhanced protection</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="security-badge security-good">WPA2</span>
+            <p class="text-gray-400 flex-1">Strong security, industry standard</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="security-badge security-weak">WPA</span>
+            <p class="text-gray-400 flex-1">Legacy protocol, vulnerable to attacks</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="security-badge security-poor">WEP/OPEN</span>
+            <p class="text-gray-400 flex-1">No encryption or easily compromised</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="cyber-card p-6 fade-in">
+        <div class="terminal-header mb-4">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+          <span class="ml-2 text-gray-400">readme.txt</span>
+        </div>
+        <h3 class="text-lg font-semibold mb-4 text-cyan-400 mono">[INSTRUCTIONS]</h3>
+        <ol class="list-decimal list-inside space-y-2 text-sm text-gray-300 mono">
+          <li>Ensure backend server is running</li>
+          <li>Click SCAN to discover networks</li>
+          <li>Review security information</li>
+          <li>Use data for educational purposes</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:5000';
+
+    async function scanNetworks() {
+      const scanBtn = document.getElementById('scan-btn');
+      const scanBtnText = document.getElementById('scan-btn-text');
+      const loading = document.getElementById('loading');
+      const resultsContainer = document.getElementById('results-container');
+      const networksList = document.getElementById('networks-list');
+
+      scanBtn.disabled = true;
+      scanBtnText.textContent = '[SCANNING...]';
+      loading.classList.remove('hidden');
+      resultsContainer.classList.add('hidden');
+      networksList.innerHTML = '';
+
+      try {
+        const response = await fetch(`${API_URL}/scan`);
+        const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        displayResults(data.networks);
+      } catch (error) {
+        alert('[ERROR] ' + error.message + '\n\nEnsure the backend server is running on port 5000.');
+        console.error('Error:', error);
+      } finally {
+        scanBtn.disabled = false;
+        scanBtnText.textContent = '▶ SCAN';
+        loading.classList.add('hidden');
+      }
+    }
+
+    function displayResults(networks) {
+      const resultsContainer = document.getElementById('results-container');
+      const networksList = document.getElementById('networks-list');
+      const networkCount = document.getElementById('network-count');
+
+      if (networks.length === 0) {
+        networksList.innerHTML = `
+          <div class="cyber-card p-8 text-center">
+            <p class="text-gray-400 mono">[NO NETWORKS FOUND] Ensure Wi-Fi is enabled and try again.</p>
+          </div>
+        `;
+        resultsContainer.classList.remove('hidden');
+        return;
+      }
+
+      networkCount.textContent = `[${networks.length} NETWORKS DETECTED]`;
+
+      networksList.innerHTML = networks.map(network => {
+        const securityRating = getSecurityRating(network.encryption);
+        const signalBars = getSignalBars(network.signal);
+        
+        return `
+          <div class="network-card fade-in">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-3 flex-wrap">
+                  <h3 class="text-xl font-semibold text-green-400 mono">${escapeHtml(network.ssid || '[HIDDEN NETWORK]')}</h3>
+                  <span class="security-badge ${securityRating.class}">${network.encryption || 'UNKNOWN'}</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+                  <div>
+                    <p class="text-gray-500 mb-2 mono text-xs">SIGNAL</p>
+                    <div class="flex items-center gap-2">
+                      <div class="signal-bars">
+                        ${signalBars}
+                      </div>
+                      <span class="text-cyan-400 mono">${network.signal}%</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 mb-2 mono text-xs">CHANNEL</p>
+                    <p class="text-gray-300 mono">${network.channel || 'N/A'}</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 mb-2 mono text-xs">FREQUENCY</p>
+                    <p class="text-gray-300 mono">${network.frequency || 'N/A'}</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 mb-2 mono text-xs">BSSID</p>
+                    <p class="text-gray-300 mono text-xs">${network.bssid || 'N/A'}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      resultsContainer.classList.remove('hidden');
+    }
+
+    function getSecurityRating(encryption) {
+      if (!encryption) return { class: 'security-poor', label: 'UNKNOWN' };
+      
+      const enc = encryption.toUpperCase();
+      if (enc.includes('WPA3')) return { class: 'security-excellent', label: 'EXCELLENT' };
+      if (enc.includes('WPA2')) return { class: 'security-good', label: 'GOOD' };
+      if (enc.includes('WPA')) return { class: 'security-weak', label: 'WEAK' };
+      if (enc.includes('WEP') || enc.includes('OPEN') || enc.includes('NONE')) {
+        return { class: 'security-poor', label: 'POOR' };
+      }
+      return { class: 'security-weak', label: 'UNKNOWN' };
+    }
+
+    function getSignalBars(signal) {
+      const percentage = parseInt(signal) || 0;
+      const bars = 4;
+      const activeBars = Math.ceil((percentage / 100) * bars);
+      
+      let html = '';
+      for (let i = 0; i < bars; i++) {
+        const height = (i + 1) * 8 + 4;
+        const isActive = i < activeBars;
+        html += `<div class="signal-bar ${isActive ? 'active' : ''}" style="height: ${height}px;"></div>`;
+      }
+      return html;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
