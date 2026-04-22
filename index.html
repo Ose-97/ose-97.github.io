@@ -674,6 +674,131 @@
     color: var(--cream);
   }
 
+  /* ── PHOTOGRAPHY ── */
+  #photography { border-top: 1px solid var(--rule); }
+
+  .photo-intro {
+    font-size: 0.92rem;
+    color: var(--warm-mid);
+    margin-bottom: 3rem;
+    margin-top: -2rem;
+  }
+
+  .photo-grid {
+    columns: 4;
+    column-gap: 1rem;
+  }
+
+  .photo-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    cursor: zoom-in;
+  }
+
+  .photo-item img {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), filter 0.3s;
+    filter: brightness(0.95);
+  }
+
+  .photo-item:hover img {
+    transform: scale(1.04);
+    filter: brightness(0.75);
+  }
+
+  .photo-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,22,18,0.0);
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-item:hover .photo-item-overlay {
+    background: rgba(26,22,18,0.25);
+  }
+
+  .photo-item-overlay svg {
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: white;
+  }
+
+  .photo-item:hover .photo-item-overlay svg {
+    opacity: 1;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,22,18,0.95);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+
+  .lightbox.open {
+    display: flex;
+  }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    display: block;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: rgba(248,244,239,0.6);
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .lightbox-close:hover { color: var(--cream); }
+
+  .lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 1px solid rgba(248,244,239,0.2);
+    color: var(--cream);
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .lightbox-prev:hover, .lightbox-next:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  .lightbox-prev { left: 2rem; }
+  .lightbox-next { right: 2rem; }
+
+  @media (max-width: 900px) {
+    .photo-grid { columns: 2; }
+  }
+
   /* ── ANIMATIONS ── */
 
   /* Hero entrance */
@@ -854,6 +979,7 @@
     <li><a href="#roles">Roles</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Work</a></li>
+    <li><a href="#photography">Photos</a></li>
     <li><a href="#design">Design</a></li>
     <li><a href="#reels">Reels</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -995,10 +1121,47 @@
   </div>
 </section>
 
+<!-- PHOTOGRAPHY -->
+<section id="photography">
+  <div class="section-header">
+    <span class="section-num reveal">04</span>
+    <h2 class="section-title reveal">Photography</h2>
+    <div class="section-rule"></div>
+  </div>
+  <p class="photo-intro reveal">Event photography shot for ASA's "A Glimpse of Africa" — capturing candid moments, connection, and culture.</p>
+  <div class="photo-grid">
+    <div class="photo-item reveal" onclick="openLightbox(0)"><img src="https://ose-97.github.io/photo-01.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(1)"><img src="https://ose-97.github.io/photo-02.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(2)"><img src="https://ose-97.github.io/photo-03.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(3)"><img src="https://ose-97.github.io/photo-04.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(4)"><img src="https://ose-97.github.io/photo-05.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(5)"><img src="https://ose-97.github.io/photo-06.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(6)"><img src="https://ose-97.github.io/photo-07.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(7)"><img src="https://ose-97.github.io/photo-08.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(8)"><img src="https://ose-97.github.io/photo-09.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(9)"><img src="https://ose-97.github.io/photo-10.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(10)"><img src="https://ose-97.github.io/photo-11.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(11)"><img src="https://ose-97.github.io/photo-12.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(12)"><img src="https://ose-97.github.io/photo-13.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(13)"><img src="https://ose-97.github.io/photo-14.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(14)"><img src="https://ose-97.github.io/photo-15.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(15)"><img src="https://ose-97.github.io/photo-16.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="photo-item reveal" onclick="openLightbox(16)"><img src="https://ose-97.github.io/photo-17.jpg" alt=""><div class="photo-item-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1, event)">‹</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-next" onclick="lightboxNav(1, event)">›</button>
+</div>
+
 <!-- DESIGN WORK -->
 <section id="design">
   <div class="section-header">
-    <span class="section-num reveal">04</span>
+    <span class="section-num reveal">05</span>
     <h2 class="section-title reveal">Design Work</h2>
     <div class="section-rule"></div>
   </div>
@@ -1034,7 +1197,7 @@
 <!-- REELS -->
 <section id="reels">
   <div class="section-header">
-    <span class="section-num reveal">05</span>
+    <span class="section-num reveal">06</span>
     <h2 class="section-title reveal">Video Reels</h2>
     <div class="section-rule"></div>
   </div>
@@ -1091,7 +1254,7 @@
 <section id="contact">
   <div class="contact-text">
     <div class="section-header" style="margin-bottom:2rem;">
-      <span class="section-num">06</span>
+      <span class="section-num">07</span>
       <h2 class="section-title">Let's Talk</h2>
       <div class="section-rule"></div>
     </div>
@@ -1184,5 +1347,43 @@
       hero.style.setProperty('--mx', x + '%');
       hero.style.setProperty('--my', y + '%');
     });
+  }  // ── Lightbox ──
+  const photoSrcs = [
+    'photo-01','photo-02','photo-03','photo-04','photo-05','photo-06',
+    'photo-07','photo-08','photo-09','photo-10','photo-11','photo-12',
+    'photo-13','photo-14','photo-15','photo-16','photo-17'
+  ].map(n => `https://ose-97.github.io/${n}.jpg`);
+
+  let currentPhoto = 0;
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  function openLightbox(idx) {
+    currentPhoto = idx;
+    lightboxImg.src = photoSrcs[idx];
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
+
+  function closeLightboxBtn() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightbox(e) {
+    if (e.target === lightbox) closeLightboxBtn();
+  }
+
+  function lightboxNav(dir, e) {
+    e.stopPropagation();
+    currentPhoto = (currentPhoto + dir + photoSrcs.length) % photoSrcs.length;
+    lightboxImg.src = photoSrcs[currentPhoto];
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightboxBtn();
+    if (e.key === 'ArrowRight') lightboxNav(1, { stopPropagation: () => {} });
+    if (e.key === 'ArrowLeft') lightboxNav(-1, { stopPropagation: () => {} });
+  });
 </script>
