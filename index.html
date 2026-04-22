@@ -596,6 +596,82 @@
     letter-spacing: 0.06em;
   }
 
+  /* ── DESIGN WORK ── */
+  #design { border-top: 1px solid var(--rule); }
+
+  .design-intro {
+    font-size: 0.92rem;
+    color: var(--warm-mid);
+    margin-bottom: 3rem;
+    margin-top: -2rem;
+  }
+
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.25rem;
+  }
+
+  .design-wide {
+    grid-column: 1 / -1;
+  }
+
+  .design-card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    background: var(--ink);
+  }
+
+  .design-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), filter 0.3s;
+    filter: brightness(0.92);
+  }
+
+  .design-wide img {
+    max-height: 220px;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+
+  .design-card:not(.design-wide) img {
+    aspect-ratio: 4/5;
+    object-fit: cover;
+  }
+
+  .design-card:hover img {
+    transform: scale(1.04);
+    filter: brightness(0.7);
+  }
+
+  .design-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem;
+    background: linear-gradient(to top, rgba(26,22,18,0.75) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .design-card:hover .design-overlay {
+    opacity: 1;
+  }
+
+  .design-overlay span {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+
   /* ── ANIMATIONS ── */
 
   /* Hero entrance */
@@ -776,6 +852,7 @@
     <li><a href="#roles">Roles</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Work</a></li>
+    <li><a href="#design">Design</a></li>
     <li><a href="#reels">Reels</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -916,10 +993,46 @@
   </div>
 </section>
 
+<!-- DESIGN WORK -->
+<section id="design">
+  <div class="section-header">
+    <span class="section-num reveal">04</span>
+    <h2 class="section-title reveal">Design Work</h2>
+    <div class="section-rule"></div>
+  </div>
+  <p class="design-intro reveal">Posters, event graphics, and campaign visuals made for ASA and beyond.</p>
+  <div class="design-grid">
+    <a class="design-card design-wide reveal" href="https://ose-97.github.io/poster-afro-rewind-ticket.jpg" target="_blank">
+      <img src="https://ose-97.github.io/poster-afro-rewind-ticket.jpg" alt="Afro Rewind Ticket">
+      <div class="design-overlay"><span>Afro Rewind · Ticket Design</span></div>
+    </a>
+    <a class="design-card reveal" href="https://ose-97.github.io/poster-afro-rewind.png" target="_blank">
+      <img src="https://ose-97.github.io/poster-afro-rewind.png" alt="Afro Rewind Poster">
+      <div class="design-overlay"><span>Afro Rewind · Event Poster</span></div>
+    </a>
+    <a class="design-card reveal" href="https://ose-97.github.io/poster-sports-day.png" target="_blank">
+      <img src="https://ose-97.github.io/poster-sports-day.png" alt="ASA Sports Day">
+      <div class="design-overlay"><span>ASA Sports Day · Poster</span></div>
+    </a>
+    <a class="design-card reveal" href="https://ose-97.github.io/poster-calvins-got-talent.jpg" target="_blank">
+      <img src="https://ose-97.github.io/poster-calvins-got-talent.jpg" alt="Calvin's Got Talent">
+      <div class="design-overlay"><span>Calvin's Got Talent · Poster</span></div>
+    </a>
+    <a class="design-card reveal" href="https://ose-97.github.io/poster-eboard.jpg" target="_blank">
+      <img src="https://ose-97.github.io/poster-eboard.jpg" alt="Eboard Roles">
+      <div class="design-overlay"><span>ASA · Eboard Roles Graphic</span></div>
+    </a>
+    <a class="design-card reveal" href="https://ose-97.github.io/poster-upcoming-events.jpg" target="_blank">
+      <img src="https://ose-97.github.io/poster-upcoming-events.jpg" alt="Upcoming Events">
+      <div class="design-overlay"><span>ASA · Spring Events Calendar</span></div>
+    </a>
+  </div>
+</section>
+
 <!-- REELS -->
 <section id="reels">
   <div class="section-header">
-    <span class="section-num reveal">04</span>
+    <span class="section-num reveal">05</span>
     <h2 class="section-title reveal">Video Reels</h2>
     <div class="section-rule"></div>
   </div>
@@ -976,7 +1089,7 @@
 <section id="contact">
   <div class="contact-text">
     <div class="section-header" style="margin-bottom:2rem;">
-      <span class="section-num">05</span>
+      <span class="section-num">06</span>
       <h2 class="section-title">Let's Talk</h2>
       <div class="section-rule"></div>
     </div>
