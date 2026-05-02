@@ -78,18 +78,18 @@
 
   /* ── HERO ── */
   .hero {
+    min-height: 100vh;
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
     padding-top: 80px;
   }
 
   .hero-text {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: end;
-    padding: 4rem 3rem;
-    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3rem;
+    border-right: 1px solid var(--rule);
   }
 
   .hero-eyebrow {
@@ -155,16 +155,13 @@
   .hero-image {
     position: relative;
     overflow: hidden;
-    height: 60vw;
-    max-height: 680px;
-    min-height: 380px;
   }
 
   .hero-image img {
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: center 35%;
-    filter: grayscale(10%) contrast(1.05);
+    object-position: 55% 50%;
+    filter: grayscale(10%) contrast(1.08) brightness(1.02);
     display: block;
   }
 
@@ -995,16 +992,12 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-text">
-    <div class="hero-text-left">
-      <p class="hero-eyebrow">Marketing Creative · Videographer</p>
-      <h1 class="hero-headline">I shoot stories<br>the algorithm <em>can't</em><br>ignore.</h1>
-    </div>
-    <div class="hero-text-right">
-      <p class="hero-sub">Marketing & Communications Videographer | ASA Creative Director | Gospel Choir Social Media Manager</p>
-      <div class="hero-actions">
-        <a href="#reels" class="btn-primary">Watch Reels</a>
-        <a href="#projects" class="btn-ghost">Case Studies</a>
-      </div>
+    <p class="hero-eyebrow">Marketing Creative · Videographer</p>
+    <h1 class="hero-headline">I shoot stories<br>the algorithm <em>can't</em><br>ignore.</h1>
+    <p class="hero-sub">Marketing & Communications Videographer | ASA Creative Director | Gospel Choir Social Media Manager</p>
+    <div class="hero-actions">
+      <a href="#reels" class="btn-primary">Watch Reels</a>
+      <a href="#projects" class="btn-ghost">Case Studies</a>
     </div>
   </div>
   <div class="hero-image">
