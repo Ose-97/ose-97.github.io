@@ -78,18 +78,18 @@
 
   /* ── HERO ── */
   .hero {
-    min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     padding-top: 80px;
   }
 
   .hero-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 5rem 3rem 5rem 3rem;
-    border-right: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    padding: 4rem 3rem;
+    border-bottom: 1px solid var(--rule);
   }
 
   .hero-eyebrow {
@@ -155,13 +155,16 @@
   .hero-image {
     position: relative;
     overflow: hidden;
+    height: 60vw;
+    max-height: 680px;
+    min-height: 380px;
   }
 
   .hero-image img {
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: center 30%;
-    filter: grayscale(20%) contrast(1.05);
+    object-position: center 35%;
+    filter: grayscale(10%) contrast(1.05);
     display: block;
   }
 
@@ -838,7 +841,7 @@
   .hero-headline { animation: heroFadeUp 0.8s ease 0.4s both; }
   .hero-sub      { animation: heroFadeUp 0.7s ease 0.6s both; }
   .hero-actions  { animation: heroFadeUp 0.7s ease 0.75s both; }
-  .hero-image    { animation: slideInRight 0.9s ease 0.3s both; }
+  .hero-image    { animation: heroFadeUp 0.9s ease 0.3s both; }
   .hero-stat-bar { animation: statBarUp 0.6s ease 1.1s both; }
 
   /* Nav logo subtle fade */
@@ -992,12 +995,16 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-text">
-    <p class="hero-eyebrow">Marketing Creative · Videographer</p>
-    <h1 class="hero-headline">I shoot stories<br>the algorithm <em>can't</em><br>ignore.</h1>
-    <p class="hero-sub">Marketing & Communications Videographer | ASA Creative Director | Gospel Choir Social Media Manager</p>
-    <div class="hero-actions">
-      <a href="#reels" class="btn-primary">Watch Reels</a>
-      <a href="#projects" class="btn-ghost">Case Studies</a>
+    <div class="hero-text-left">
+      <p class="hero-eyebrow">Marketing Creative · Videographer</p>
+      <h1 class="hero-headline">I shoot stories<br>the algorithm <em>can't</em><br>ignore.</h1>
+    </div>
+    <div class="hero-text-right">
+      <p class="hero-sub">Marketing & Communications Videographer | ASA Creative Director | Gospel Choir Social Media Manager</p>
+      <div class="hero-actions">
+        <a href="#reels" class="btn-primary">Watch Reels</a>
+        <a href="#projects" class="btn-ghost">Case Studies</a>
+      </div>
     </div>
   </div>
   <div class="hero-image">
@@ -1031,7 +1038,7 @@
       <img src="https://ose-97.github.io/calvin-logo.png" alt="Calvin University" class="role-logo">
       <h3 class="role-title">Student Videographer</h3>
       <p class="role-org">Marketing & Communications · Calvin University</p>
-      <p class="role-desc">Concept, shoot, and edit promotional pieces. From hype reels to heartfelt stories, supporting admissions, events, and campus campaigns.</p>
+      <p class="role-desc">Concept, shoot, and edit promotional pieces — from hype reels to heartfelt stories — supporting admissions, events, and campus campaigns.</p>
     </div>
     <div class="role-card reveal">
       <img src="https://ose-97.github.io/asa-logo.jpg" alt="ASA" class="role-logo">
@@ -1085,7 +1092,7 @@
       </div>
       <div>
         <h3 class="case-title">Music at Calvin Promotion</h3>
-        <p class="case-desc">Produced the new Music at Calvin promo video, now used on Calvin platforms. Coordinated filming B-roll across multiple Music classes and collaborated directly with professors to deliver a final piece that the department was proud to feature as their flagship content.</p>
+        <p class="case-desc">Produced the new Music at Calvin promo video now used on the Calvin website, Instagram, and TikTok. Coordinated filming B-roll across multiple Music classes and collaborated directly with professors to deliver a final piece the department was proud to feature as their flagship content.</p>
       </div>
       <div class="case-result">
         <span class="case-result-num">Flagship</span>
@@ -1113,7 +1120,7 @@
       </div>
       <div>
         <h3 class="case-title">Gospel Choir Social Refresh</h3>
-        <p class="case-desc">Reframed the choir's feed around rehearsals, performances, and human moments while leading a team of 3. Focused on reels that captured the sound, joy, and community, so people felt the music before they ever experienced a concert in person.</p>
+        <p class="case-desc">Reframed the choir's feed around rehearsals, performances, and human moments while leading a team of 3. Focused on reels that captured the sound, joy, and community — so people felt the music before they ever experienced a concert in person.</p>
       </div>
       <div class="case-result">
         <span class="case-result-num">50k+</span>
@@ -1219,7 +1226,7 @@
         <div class="reel-play">
           <svg viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
         </div>
-        <p class="reel-title">Mr & Miss ASA Event</p>
+        <p class="reel-title">ASA · Mr & Miss ASA Event</p>
       </div>
     </a>
     <a href="https://www.instagram.com/p/DQ0cjkADW7k/" target="_blank" class="reel-card reveal">
@@ -1228,7 +1235,7 @@
         <div class="reel-play">
           <svg viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
         </div>
-        <p class="reel-title">Gospel Choir Trailer</p>
+        <p class="reel-title">Gospel Choir Snippets</p>
       </div>
     </a>
     <a href="https://www.instagram.com/p/DS9ONAsDV5C/" target="_blank" class="reel-card reveal">
@@ -1237,7 +1244,7 @@
         <div class="reel-play">
           <svg viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
         </div>
-        <p class="reel-title">Gospel Choir Semester Recap</p>
+        <p class="reel-title">Gospel Choir Live Performance</p>
       </div>
     </a>
     <a href="https://www.instagram.com/p/DWXxDNGDGF8/" target="_blank" class="reel-card reveal">
@@ -1255,7 +1262,7 @@
         <div class="reel-play">
           <svg viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
         </div>
-        <p class="reel-title">ASA Afro Rewind Trailer</p>
+        <p class="reel-title">ASA · Latest Reel</p>
       </div>
     </a>
   </div>
